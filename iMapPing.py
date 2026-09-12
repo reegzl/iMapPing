@@ -10,7 +10,7 @@ BANNER = """\033[35m
 ██║██╔████╔██║███████║██████╔╝  ██████╔╝██║██╔██╗ ██║██║  ███╗
 ██║██║╚██╔╝██║██╔══██║██╔═══╝   ██╔═══╝ ██║██║╚██╗██║██║   ██║
 ██║██║ ╚═╝ ██║██║  ██║██║       ██║     ██║██║ ╚████║╚██████╔╝
-╚═╝╚═╝     ╚═╝╚═╝  ╚═╝╚═╝       ╚═╝     ╚═╝╚═╝  ╚═╝╚═╝ ╚══════╝ 
+╚═╝╚═╝     ╚═╝╚═╝  ╚═╝╚═╝       ╚═╝     ╚═╝╚═╝  ╚═══╝ ╚═════╝ 
 \033[0m"""
 
 def test_single_domain(line):
@@ -58,7 +58,7 @@ def test_domains(domains_file="domains.txt", output_working="domains_working.txt
     working_count = 0
     dead_count = 0
 
-    max_workers = 200  # Bumped to 200 threads for faster throughput on large lists
+    max_workers = 150  # Edit this for how many threads you want to use.
     print(f"\033[36mTesting {total_lines} configurations using {max_workers} concurrent threads...\033[0m\n")
     
     print('\033[?25l', end="")
@@ -70,7 +70,6 @@ def test_domains(domains_file="domains.txt", output_working="domains_working.txt
     dead_buffer = set()
     logged_dead = set()
 
-    # Initialize output files fresh at the start
     open(output_working, 'w', encoding='utf-8').close()
     open(output_dead, 'w', encoding='utf-8').close()
 
