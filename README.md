@@ -23,11 +23,30 @@
 
 ---
 
-## What's New in v1.0
+## Overview
 
-* **Documentation & Installation Refinement:** Fixed and completed the README.
+**iMapPing** is a high-performance terminal utility built in Python by **REEGZL**, designed to validate massive lists of IMAP server routing rules instantly. When dealing with large domain lists (such as thousands or millions of educational and corporate mail servers), checking them manually or via active authentication risks account lockouts and IP blacklisting. 
 
-* **Executable File & Source Code:** Released the v1.0 Python file and the Source Code for it. 
+iMapPing bypasses credential checking entirely, performing ultra-fast, non-invasive network-level socket checks and SSL handshakes concurrently to separate functional servers from dead wood.
+
+---
+
+## Features
+
+* **High-Concurrency Threading:** Utilizes a `ThreadPoolExecutor` running 100 concurrent worker threads to test large datasets in minutes instead of days.
+* **Safe, Non-Invasive Testing:** Strictly evaluates raw TCP connectivity and SSL/TLS handshakes without sending authentication payloads, completely eliminating account locks or auth blockages.
+* **Real-Time Colored UI & Progress Bar:** Features a dynamic terminal progress interface displaying percentage completion, active thread counts, live working servers, and non-working servers.
+* **Automated Result Splitting:** Automatically parses and partitions data into `domains_working.txt` (keeping valid routes) and `domains_dead.txt` (isolating dead configurations).
+* **Lightweight & Standalone:** Built using Python's native standard library (`socket`, `ssl`, `concurrent.futures`), requiring no external pip packages.
+
+---
+
+## How It Works
+
+iMapPing acts as an automated network health check for mail routing infrastructure:
+1. **File Ingestion:** Reads the target configurations line by line from `domains.txt`, interpreting custom domain, host, and port pairings.
+2. **Socket & SSL Handshake:** Spawns background worker threads that open a raw network socket to the mail host and securely negotiate the TLS/SSL wrapper (with certificate verification relaxed to accommodate self-signed institutional servers).
+3. **Data Partitioning:** Safely tracks metrics using thread-safe locking mechanisms, rewriting operational nodes back to disk while cleanly cataloging dead targets.
 
 ---
 
@@ -55,10 +74,10 @@
 
 If iMapPing has streamlined your workflow or saved you time, consider supporting its development with crypto:
 
-Bitcoin (BTC): `bc1qm427zm2jxmesulwjd4j95k82ck9h7l9n7wqemt`
+* **Bitcoin (BTC):** `bc1qm427zm2jxmesulwjd4j95k82ck9h7l9n7wqemt`
+* **Ethereum (ETH):** `0xf6bf5446Efe20f1404016895c6deaf0F22EF76CE`
+* **Stellar (XLM):** `GBDLBCAE75FO3QNB5VWCWMEOIV2GEP7UFPP3CQICPM3KOZ2YVY55E7OJ`
 
-Ethereum (ETH): `0xf6bf5446Efe20f1404016895c6deaf0F22EF76CE`
-
-Stellar (XLM): `GBDLBCAE75FO3QNB5VWCWMEOIV2GEP7UFPP3CQICPM3KOZ2YVY55E7OJ`
 
 Thanks for checking out the tool!
+
